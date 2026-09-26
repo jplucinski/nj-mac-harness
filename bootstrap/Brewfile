@@ -1,0 +1,47 @@
+# Optional Mac toolchain for the overlay. This is not the nj-dev-harness
+# required-tool list. grepai is intentionally absent: it stays a harness
+# requirement. Homebrew core has no grepai formula. The third-party tap
+# yoanbernabeu/tap/grepai exists and is not added here.
+#
+# Install only when you opt in:
+#   brew bundle --file bootstrap/Brewfile
+#   ./install.sh --brew
+
+# Core CLI
+brew "go-task"
+brew "fzf"
+brew "ripgrep"
+brew "fd"
+brew "bat"
+brew "eza"
+brew "jq"
+brew "yq"
+brew "zoxide"
+brew "atuin"
+
+# Git, Docker, Kubernetes
+brew "lazygit"
+brew "lazydocker"
+brew "kubernetes-cli" # kubectl
+brew "k9s"
+brew "stern"
+brew "gh"
+brew "git-delta"
+
+# Diagnostics and HTTP
+brew "jless"
+brew "lnav"
+brew "grpcurl"
+brew "xh"
+
+# Agent terminal runtime. Hammerspoon only launches the herdr CLI.
+brew "herdr"
+
+# Apps
+cask "orbstack"
+cask "obsidian"
+cask "hammerspoon"
+cask "dbeaver-community"
+cask "bruno"
+cask "intellij-idea"
+cask "ghostty"
