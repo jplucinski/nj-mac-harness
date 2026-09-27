@@ -88,17 +88,23 @@ local function moveToAdjacentScreen(direction)
     end
 
     local current = win:screen()
-    local index = 1
+    local index = nil
     for i, screen in ipairs(screens) do
       if screen:id() == current:id() then
         index = i
         break
       end
     end
+    if not index then
+      return
+    end
 
     local target = screens[((index - 1 + direction) % #screens) + 1]
     local from = current:frame()
     local to = target:frame()
+    if from.w <= 0 or from.h <= 0 or to.w <= 0 or to.h <= 0 then
+      return
+    end
     local wf = win:frame()
     win:setFrame({
       x = to.x + ((wf.x - from.x) / from.w) * to.w,

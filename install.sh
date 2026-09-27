@@ -97,9 +97,11 @@ refuse_existing() {
   else
     printf 'error: %s already exists and is not a symlink.\n' "$TARGET" >&2
   fi
-  cat >&2 <<EOF
+  cat >&2 <<'EOF'
 Move it aside, then run ./install.sh again. For example:
-  mv ${TARGET} ${TARGET}.personal
+EOF
+  printf '  mv %s %s.personal\n' "$TARGET" "$TARGET" >&2
+  cat >&2 <<'EOF'
 This installer will not overwrite a personal Hammerspoon config.
 EOF
   exit 1

@@ -161,11 +161,13 @@ for _, entry in ipairs(bindings.registry) do
 end
 
 local apps = require("apps")
+local function shellQuote(value)
+  return "'" .. string.gsub(value, "'", "'\\''") .. "'"
+end
+
 local function assertScript(command)
   local script = apps.launchScript(command)
-  if string.find(script, "'", 1, true) then
-    fail("launch script for " .. command .. " contains a single quote")
-  end
+  local quoted = shellQuote(command)
   if not string.find(script, 'eval "$(/opt/homebrew/bin/brew shellenv)"', 1, true) then
     fail("launch script for " .. command .. " missing Homebrew shellenv")
   end
@@ -175,8 +177,8 @@ local function assertScript(command)
   if not string.find(script, '[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc";', 1, true) then
     fail("launch script for " .. command .. " does not source ~/.bashrc")
   end
-  if not string.find(script, "; " .. command, 1, true) or script:sub(-#command) ~= command then
-    fail("launch script for " .. command .. " does not end with the command")
+  if not string.find(script, "; " .. quoted, 1, true) or script:sub(-#quoted) ~= quoted then
+    fail("launch script for " .. command .. " does not end with a quoted command")
   end
 end
 

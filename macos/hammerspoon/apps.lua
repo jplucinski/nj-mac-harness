@@ -31,7 +31,7 @@ local function launchFocusCycle(appName)
       return
     end
     if not windows.cycleApp(app, 1) then
-      hs.application.launchOrFocus(appName)
+      hs.alert.show("No standard windows for " .. appName)
     end
   end
 end
@@ -47,7 +47,7 @@ local function launchScript(command)
     'if [ -x /opt/homebrew/bin/brew ]; then eval "$(/opt/homebrew/bin/brew shellenv)";',
     'elif [ -x /usr/local/bin/brew ]; then eval "$(/usr/local/bin/brew shellenv)"; fi;',
     '[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc";',
-    command,
+    shellQuote(command),
   }, " ")
 end
 
