@@ -135,7 +135,7 @@ local function show()
   local screen = (focused and focused:screen()) or hs.screen.mainScreen()
   local frame = screen:frame()
   local width = math.min(720, frame.w - 80)
-  local height = math.min(math.max(160, 36 + (lineCount * 18)), frame.h - 80)
+  local height = math.min(math.max(200, 48 + (lineCount * 20)), frame.h - 80)
   local rect = {
     x = frame.x + ((frame.w - width) / 2),
     y = frame.y + ((frame.h - height) / 2),
